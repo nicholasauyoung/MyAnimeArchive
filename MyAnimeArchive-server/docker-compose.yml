@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+
+  myanimearchive:
+    build: './myanimearchive'
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbit
+    environment:
+      - PYTHONBUFFERED=true
+      - FLASK_DEBUG=1
+    volumes:
+      - ./myanimearchive:/app
+    command: python app.py
+    restart: on-failure
+
+  rabbit:
+    hostname: rabbit
+    image: "rabbitmq:3-management"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  db:
+    image: mysql:latest
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: user
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_PASSWORD: mypassword
+      MYSQL_DATABASE: myanimearchive
+    volumes:
+      - my-db:/var/lib/mysql
+    ports:
+      - '3306:3306'
+
+  celery_workers:
+    build: './celery_workers'
+    user: nobody
+    depends_on:
+      - rabbit
+      - myanimearchive
+      - db
+    restart: always
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8082:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: mypassword
+
+volumes:
+  my-db:

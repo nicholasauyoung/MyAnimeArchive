@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+.header_text
+{
+  text-decoration: none;
+  color: white;
+  font-family: "Verdana,Arial";
+}

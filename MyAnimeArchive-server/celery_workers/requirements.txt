@@ -1,0 +1,3 @@
+celery[redis]
+mysql-connector-python==8.0.28
+python-decouple==3.5

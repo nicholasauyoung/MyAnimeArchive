@@ -1,0 +1,8 @@
+./idea
+.idea
+./celery_workers/.env
+/celery_workers/.env
+./myanimearchive/.env
+/myanimearchive/.env
+./myanimearchive/routes/__pycache__
+/myanimearchive/routes/__pycache__
