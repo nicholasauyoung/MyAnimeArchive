@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+.logo_MyAnimeArchive {
+    font-family: "Lobster";
+    font-size: 30px;
+    color: #2f52a2;
+}
+
+.appbar_style {
+    background-color: white;
+}
